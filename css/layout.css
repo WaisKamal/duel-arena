@@ -1,0 +1,1017 @@
+* {
+  margin:      0;
+  padding:     0;
+  box-sizing:  border-box;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+html {
+  font-family: Roboto;
+}
+
+body {
+  position:    relative;
+  display:     flex;
+  width:       1366px;
+  height:      768px;
+  align-items: stretch;
+  overflow:    hidden;
+  transform-origin: 0 0;
+  background:  url("../img/wallpaper.png");
+}
+
+.overlay {
+  position:   absolute;
+  width:      100%;
+  height:     100%;
+  transition: 0.2s;
+  z-index:    2;
+  background: rgba(0,0,0,0.5);
+}
+
+.overlay.hide {
+  pointer-events: none;
+  background:     transparent;
+}
+
+.pane {
+  display:        flex;
+  flex-direction: column;
+  width:          300px;
+  height:         100%;
+  padding:        20px;
+  box-shadow:     0px 0px 20px 10px rgba(0,0,0,0.25);
+  z-index:        1;
+  background:     #111;
+}
+
+.pane .lp {
+  width:   100%;
+}
+
+.pane .lp .wrapper {
+  display:     flex;
+  width:       100%;
+  align-items: center;
+}
+
+.pane .lp .wrapper .avatar {
+  position:      relative;
+  width:         50px;
+  height:        50px;
+  margin-right:  10px;
+  border:        3px solid #FFF;
+  border-radius: 25px;
+  overflow:      hidden;
+}
+
+.pane .lp .wrapper .avatar img {
+  display: block;
+  width:   100%;
+  height:  100%;
+}
+
+.pane .lp .wrapper .info {
+  display:         flex;
+  flex-direction:  column;
+  flex-grow:       1;
+  justify-content: center;
+  color:           #FFF;
+}
+
+.pane .lp .wrapper .info .lptext {
+  width:         100%;
+  margin-bottom: 5px;
+  font-size:     24px;
+  line-height:   1;
+}
+
+.pane .lp .wrapper .info .lptext .lpdiff {
+  display:       inline-block;
+  margin-left:   10px;
+  padding:       4px;
+  border-radius: 3px;
+  font-size:     12px;
+  transition:    0.1s;
+  transform:     translateY(-4px);
+  color:         #FFF;
+  background:    #F44336;
+}
+
+.pane .lp .wrapper .info .lptext .lpdiff.pos {
+  background: #4CAF50;
+}
+
+.pane .lp .wrapper .info .lptext .lpdiff.hide {
+  transform: translateY(-4px) scale(0.5);
+  opacity:   0;
+}
+
+.pane .lp .wrapper .info .lpbar {
+  position:      relative;
+  width:         100%;
+  height:        10px;
+  margin-top:    5px;
+  border-radius: 5px;
+  overflow:      hidden;
+}
+
+.pane .lp .wrapper .info .lpbar .fluid {
+  width:         100%;
+  height:        100%;
+  border-radius: 5px;
+  box-shadow:    0px 0px 5px 0px rgba(0,0,0,0.25);
+  background:    linear-gradient(#555, #333);
+}
+
+.pane .card {
+  position:   relative;
+  width:      100%;
+  margin:     20px 0px;
+  box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.25);
+}
+
+.pane .card img {
+  display: block;
+  width:   100%;
+  height:  377px;
+}
+
+.pane .cardinfo {
+  width:         100%;
+  padding:       10px;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  flex-grow:     1;
+  overflow:      hidden;
+  box-shadow:    0px 2px 4px 2px rgba(0,0,0,0.25);
+  font-size:     14px;
+  line-height:   1;
+  color:         #FFF;
+  background:    #333;
+}
+
+.pane .cardinfo:hover {
+  overflow: hidden auto;
+}
+
+.pane .cardinfo .namewrapper {
+  display:     flex;
+  width:       100%;
+  align-items: flex-start;
+}
+
+.pane .cardinfo .namewrapper .name {
+  width:          calc(100% - 30px);
+  margin-top:     5.5px;
+  font-weight:    bold;
+  text-transform: uppercase;
+  color:          #FFEB3B;
+}
+
+.pane .cardinfo .namewrapper .attrib {
+  position:    relative;
+  width:       25px;
+  height:      25px;
+  margin-left: 5px;
+}
+
+.pane .cardinfo .namewrapper .attrib img {
+  display: block;
+  width:   100%;
+  height:  100%;
+}
+
+.pane .cardinfo .type {
+  width:       100%;
+  margin-top:  5px;
+}
+
+.pane .cardinfo .level {
+  display:    flex;
+  width:      100%;
+  margin-top: 5px;
+}
+
+.pane .cardinfo.magic .level {
+  display: none;
+}
+
+.pane .cardinfo .level img {
+  width:  15px;
+  height: 15px;
+}
+
+.pane .cardinfo .level img:nth-child(n + 2) {
+  margin-left: 2px;
+}
+
+.pane .cardinfo .text {
+  width:       100%;
+  margin-top:  5px;
+  font-style:  italic;
+  line-height: initial;
+}
+
+.pane .cardinfo.magic .text {
+  font-style: normal;
+}
+
+.pane .cardinfo .text.effect {
+  font-style: normal;
+}
+
+.pane .cardinfo .battledata {
+  width:       100%;
+  padding-top: 5px;
+  margin-top:  5px;
+}
+
+.pane .cardinfo.magic .battledata {
+  display: none;
+}
+
+.pane .cardinfo.back * {
+  display: none;
+}
+
+.phases {
+  display:         flex;
+  padding:         20px;
+  flex-direction:  column;
+  justify-content: center;
+}
+
+.phases div {
+  width:         32px;
+  padding:       12px 6px;
+  margin-bottom: 10px;
+  border:        1px solid #FFF;
+  border-radius: 3px;
+  text-align:    center;
+  word-break:    break-all;
+  transition:    0.2s;
+  color:         #FFF;
+}
+
+.phases div:last-child {
+  margin: 0;
+}
+
+.phases div.active {
+  box-shadow:   0px 0px 8px 4px #388E3C;
+}
+
+.field {
+  position:        relative;
+  display:         flex;
+  flex-grow:       1;
+  height:          100%;
+  justify-content: center;
+  align-items:     center;
+}
+
+.field .fieldimg {
+  display: block;
+}
+
+.field .phaseview {
+  position:       absolute;
+  padding:        20px;
+  border:         2px solid #388E3C;
+  border-radius:  5px;
+  box-shadow:     0px 0px 10px 5px rgba(0,0,0,0.25);
+  font-size:      32px;
+  line-height:    1;
+  opacity:        1;
+  transition:     0.2s;
+  z-index:        2;
+  color:          #FFF;
+  background:     #333;
+}
+
+.field .phaseview.hide {
+  pointer-events: none;
+  animation:      none;
+  opacity:        0;
+  transition:     none;
+}
+
+.field .sword {
+  position:       absolute;
+  width:          40px;
+  height:         70px;
+  transition:     ease-in 0.2s;
+  opacity:        1;
+  pointer-events: none;
+  z-index:        3;
+}
+
+.field .sword.active {
+  filter: brightness(150%);
+  transition: filter ease-in 0.2s;
+}
+
+/* when sword is moving to attack, not rotating */
+.field .sword.moving {
+  filter: brightness(150%);
+}
+
+.field .sword.hide {
+  opacity: 0;
+}
+
+.field .sword.p1 {
+  top: calc(50% + 30px);
+}
+
+.field .sword.p1.s1 {
+  left: calc(50% - 240px);
+}
+
+.field .sword.p1.s2 {
+  left: calc(50% - 130px);
+}
+
+.field .sword.p1.s3 {
+  left: calc(50% - 20px);
+}
+
+.field .sword.p1.s4 {
+  left: calc(50% + 90px);
+}
+
+.field .sword.p1.s5 {
+  left: calc(50% + 200px);
+}
+
+.field .sword img {
+  display: block;
+  width:   40px;
+  height:  70px;
+}
+
+.field .cardtooltip {
+  position:      absolute;
+  top:           calc(100% - 160px) !important;
+  padding:       8px;
+  border-radius: 3px;
+  box-shadow:    0px 0px 5px 0px rgba(0,0,0,0.25);
+  font-size:     14px;
+  font-weight:   bold;
+  transform:     translateX(-50%);
+  z-index:       2;
+  color:         #333;
+  background:    #DDD;
+}
+
+.field .cardtooltip.hide {
+  display: none;
+}
+
+.field .fieldtooltip {
+  position:      absolute;
+  top:           calc(50% - 25px);
+  padding:       8px;
+  border-radius: 3px;
+  box-shadow:    0px 0px 5px 0px rgba(0,0,0,0.25);
+  font-size:     12px;
+  font-weight:   bold;
+  line-height:   1;
+  transform:     translateX(-50%);
+  transition:    transform 0.1s, opacity 0.1s;
+  z-index:       2;
+  color:         #FFF;
+  background:    #333;
+}
+
+.field .fieldtooltip:before {
+  content:       "";
+  position:      absolute;
+  width:         10px;
+  height:        10px;
+  top:           23px;
+  left:          calc(50% - 5px);
+  border-radius: 0px 0px 3px 0px;
+  transform:     rotate(45deg);
+  background:    inherit;
+}
+
+.field .fieldtooltip.hide {
+  transform:      translateX(-50%) translateY(-5px);
+  pointer-events: none;
+  transition:     none;
+  opacity:        0;
+}
+
+.field .p1deck, .field .p2deck,
+.field .p1grave, .field .p2grave,
+.field .p1fusion, .field .p2fusion,
+.field .p1hand, .field .p2hand,
+.field .p1m1, .field .p1m2, .field .p1m3, .field .p1m4, .field .p1m5,
+.field .p1s1, .field .p1s2, .field .p1s3, .field .p1s4, .field .p1s5,
+.field .p2m1, .field .p2m2, .field .p2m3, .field .p2m4, .field .p2m5,
+.field .p2s1, .field .p2s2, .field .p2s3, .field .p2s4, .field .p2s5 {
+  position:   absolute;
+  width:      200px;
+  height:     290px;
+  overflow:   hidden;
+  transition: ease-out 0.2s;
+  cursor:     pointer;
+  transform:  scale(calc(1 / 2.9));
+}
+
+.field .p1hand, .field .p2hand {
+  transform: none;
+}
+
+.field .p1hand {
+  top: calc(100% - 100px);
+}
+
+.field .p1hand.discardState {
+  z-index: 2;
+}
+
+.field .p1hand:hover {
+  top: calc(100% - 120px);
+}
+
+.field .p1hand.shuffle {
+  top:  100% !important;
+  left: calc(50% - 100px) !important;
+}
+
+.field .p2hand.shuffle {
+  top:  -290px !important;
+  left: calc(50% - 100px) !important;
+}
+
+.field .p1deck {
+  transform: scale(calc(1/2.9)) rotateY(180deg);
+}
+
+.field .p1deck img, .field .p2deck img,
+.field .p1grave img, .field .p2grave img,
+.field .p1fusion img, .field .p2fusion img,
+.field .p1hand img, .field .p2hand img,
+.field .p1m1 img, .field .p1m2 img, .field .p1m3 img, .field .p1m4 img, .field .p1m5 img,
+.field .p1s1 img, .field .p1s2 img, .field .p1s3 img, .field .p1s4 img, .field .p1s5 img,
+.field .p2m1 img, .field .p2m2 img, .field .p2m3 img, .field .p2m4 img, .field .p2m5 img,
+.field .p2s1 img, .field .p2s2 img, .field .p2s3 img, .field .p2s4 img, .field .p2s5 img {
+  width:  200px;
+  height: 290px;
+}
+
+.field .p2deck img, .field .p2grave img, .field .p2fusion img, .field .p2hand img,
+.field .p2m1 img, .field .p2m2 img, .field .p2m3 img, .field .p2m4 img, .field .p2m5 img,
+.field .p2s1 img, .field .p2s2 img, .field .p2s3 img, .field .p2s4 img, .field .p2s5 img {
+  transform: rotateZ(180deg);
+}
+
+.field .p1deck img {
+  transform: rotateY(180deg);
+}
+
+.field .p2deck {
+  top:       calc(50% - 330px);
+  left:      calc(50% - 460px) !important;
+  transform: scale(calc(1/2.9)) rotateY(180deg);
+}
+
+.field .p2hand {
+  top:       -190px;
+  transform: rotateY(180deg);
+}
+
+.field .p2hand:hover {
+  top: -170px;
+}
+
+.field .p2hand img {
+  transform: rotateY(180deg) rotateZ(180deg);
+}
+
+.field .p1deck {
+  top:  calc(50% + 40px);
+  left: calc(50% + 260px) !important;
+}
+
+.field .p2deck img {
+  transform: rotateY(180deg) rotateZ(180deg);
+}
+
+.field .p1grave {
+  top:  calc(50% - 80px);
+  left: calc(50% + 260px) !important;
+}
+
+.field .p2grave {
+  top:  calc(50% - 210px);
+  left: calc(50% - 460px) !important;
+}
+
+.field .p1fusion {
+  top:  calc(50% + 40px);
+  left: calc(50% - 460px) !important;
+}
+
+.field .p2fusion {
+  top:  calc(50% - 330px);
+  left: calc(50% + 260px) !important; 
+}
+
+.field .p1m1 {
+  top:  calc(50% - 80px);
+  left: calc(50% - 320px) !important;
+}
+
+.field .p1m2 {
+  top:  calc(50% - 80px);
+  left: calc(50% - 210px) !important;
+}
+
+.field .p1m3 {
+  top:  calc(50% - 80px);
+  left: calc(50% - 100px) !important;
+}
+
+.field .p1m4 {
+  top:  calc(50% - 80px);
+  left: calc(50% + 10px) !important;
+}
+
+.field .p1m5 {
+  top:  calc(50% - 80px);
+  left: calc(50% + 120px) !important;
+}
+
+.field .p1s1 {
+  top:  calc(50% + 40px);
+  left: calc(50% - 320px) !important;
+}
+
+.field .p1s2 {
+  top:  calc(50% + 40px);
+  left: calc(50% - 210px) !important;
+}
+
+.field .p1s3 {
+  top:  calc(50% + 40px);
+  left: calc(50% - 100px) !important;
+}
+
+.field .p1s4 {
+  top:  calc(50% + 40px);
+  left: calc(50% + 10px) !important;
+}
+
+.field .p1s5 {
+  top:  calc(50% + 40px);
+  left: calc(50% + 120px) !important;
+}
+
+.field .p2m1 {
+  top:  calc(50% - 210px);
+  left: calc(50% + 120px) !important;
+}
+
+.field .p2m2 {
+  top:  calc(50% - 210px);
+  left: calc(50% + 10px) !important;
+}
+
+.field .p2m3 {
+  top:  calc(50% - 210px);
+  left: calc(50% - 100px) !important;
+}
+
+.field .p2m4 {
+  top:  calc(50% - 210px);
+  left: calc(50% - 210px) !important;
+}
+
+.field .p2m5 {
+  top:  calc(50% - 210px);
+  left: calc(50% - 320px) !important;
+}
+
+.field .p2s1 {
+  top:  calc(50% - 330px);
+  left: calc(50% + 120px) !important;
+}
+
+.field .p2s2 {
+  top:  calc(50% - 330px);
+  left: calc(50% + 10px) !important;
+}
+
+.field .p2s3 {
+  top:  calc(50% - 330px);
+  left: calc(50% - 100px) !important;
+}
+
+.field .p2s4 {
+  top:  calc(50% - 330px);
+  left: calc(50% - 210px) !important;
+}
+
+.field .p2s5 {
+  top:  calc(50% - 330px);
+  left: calc(50% - 320px) !important;
+}
+
+.field .mFaceDown {
+  transform: scale(calc(1/2.9)) rotateX(180deg) rotateZ(90deg);
+}
+
+.field .defPos {
+  transform: scale(calc(1/2.9)) rotateX(0deg) rotateZ(90deg);
+}
+
+.field .stFaceDown {
+  transform: scale(calc(1/2.9)) rotateY(180deg);
+}
+
+.field .stFaceDown img {
+  transform: rotateY(180deg);
+}
+
+.field .flash {
+  filter: brightness(1.5);
+}
+
+.field .glow {
+  box-shadow: 0px 0px 50px 10px rgba(255, 255, 255, 0.5);
+  filter:     brightness(1.5);
+}
+
+.field .h-shield {
+  position:   absolute;
+  width:      300px;
+  height:     100px;
+  top:        calc(100% + 50px);
+  left:       -50px;
+  transform:  rotate(20deg);
+  transition: linear 0.5s;
+  background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.field .h-shield.done {
+  top: -150px;
+}
+
+.field .v-shield {
+  position:   absolute;
+  width:      100px;
+  height:     350px;
+  top:        -30px;
+  left:       260px;
+  transform:  rotate(20deg);
+  transition: linear 0.5s;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.field .v-shield.done {
+  left: -160px;
+}
+
+.field .okdiag {
+  position:      absolute;
+  width:         500px;
+  padding:       30px 40px;
+  border:        2px solid #388E3C;
+  border-radius: 5px;
+  box-shadow:    0px 0px 20px 10px rgba(0,0,0,0.5);
+  transition:    .2s;
+  z-index:       3;
+  color:         #FFF;
+  background:    #333;
+}
+
+.field .okdiag.hide {
+  transform: scale(0);
+}
+
+.field .okdiag .text {
+  width:      100%;
+  text-align: center;
+}
+
+.field .okdiag .buttons {
+  display:         flex;
+  width:           100%;
+  margin-top:      30px;
+  justify-content: center;
+}
+
+.field .okdiag .buttons div {
+  width:         60px;
+  padding:       10px;
+  border-radius: 3px;
+  box-shadow:    0px 2px 5px 0px rgba(0,0,0,0.25);
+  text-align:    center;
+  cursor:        pointer;
+  background:    #388E3C;
+}
+
+.field .okdiag .buttons div:hover {
+  background: #2E7D32;
+}
+
+
+.field .yesnodiag {
+  position:      absolute;
+  width:         500px;
+  padding:       30px 40px;
+  border:        2px solid #388E3C;
+  border-radius: 5px;
+  box-shadow:    0px 0px 20px 10px rgba(0,0,0,0.5);
+  transition:    .2s;
+  z-index:       3;
+  color:         #FFF;
+  background:    #333;
+}
+
+.field .yesnodiag.hide {
+  transform: scale(0);
+}
+
+.field .yesnodiag .text {
+  width: 100%;
+}
+
+.field .yesnodiag .buttons {
+  display:         flex;
+  width:           100%;
+  margin-top:      30px;
+  justify-content: center;
+}
+
+.field .yesnodiag .buttons div {
+  width:         60px;
+  padding:       10px;
+  border-radius: 3px;
+  box-shadow:    0px 2px 5px 0px rgba(0,0,0,0.25);
+  text-align:    center;
+  cursor:        pointer;
+  background:    #388E3C;
+}
+
+.field .yesnodiag .buttons div:hover {
+  background: #2E7D32;
+}
+
+.field .yesnodiag .buttons div:last-child {
+  margin-left: 10px;
+}
+
+.field .discarddiag {
+  position:      absolute;
+  width:         500px;
+  padding:       30px 40px;
+  border:        2px solid #388E3C;
+  border-radius: 5px;
+  box-shadow:    0px 0px 20px 10px rgba(0,0,0,0.5);
+  transition:    .2s;
+  z-index:       3;
+  color:         #FFF;
+  background:    #333;
+}
+
+.field .discarddiag.hide {
+  transform: scale(0);
+}
+
+.field .discarddiag .text {
+  width: 100%;
+}
+
+.field .discarddiag .cards {
+  display:    flex;
+  width:      100%;
+  margin-top: 10px;
+  flex-wrap:  wrap;
+}
+
+.field .discarddiag .cards img {
+  display:       block;
+  height:        40px;
+  margin-bottom: 10px;
+}
+
+.field .discarddiag .cards img:nth-child(n - 1) {
+  margin-right: 10px;
+}
+
+.field .viewdiag {
+  position:      absolute;
+  padding:       50px 80px;
+  border:        2px solid #388E3C;
+  border-radius: 5px;
+  box-shadow:    0px 0px 20px 10px rgba(0,0,0,0.5);
+  transition:    .2s;
+  z-index:       3;
+  background:    #333;
+}
+
+.field .viewdiag.hide {
+  transform: scale(0);
+}
+
+.field .viewdiag .arrow {
+  position:        absolute;
+  display:         flex;
+  top:             97px;
+  width:           40px;
+  height:          40px;
+  border-radius:   20px;
+  justify-content: center;
+  align-items:     center;
+  cursor:          pointer;
+  background:      #FFF;
+}
+
+.field .viewdiag .arrow.left {
+  left: 20px;
+}
+
+.field .viewdiag .arrow.right {
+  right: 20px;
+}
+.field .viewdiag .arrow i {
+  display:   block;
+  font-size: 32px;
+  color:     #333;
+}
+
+.field .viewdiag .cardrow {
+  display:     flex;
+  align-items: center;
+}
+
+.field .viewdiag .cardrow .card {
+  position:    relative;
+  width:       calc(400px / 5.8);
+  height:      100px;
+  margin-left: 20px;
+}
+
+.field .viewdiag .cardrow .card:first-child {
+  margin: 0;
+}
+
+.field .viewdiag .cardrow .card img {
+  display: block;
+  width:   100%;
+  height:  100%;
+}
+
+.field .viewdiag .scrollbar {
+  position:      relative;
+  width:         100%;
+  height:        4px;
+  border-radius: 4px;
+  margin-top:    30px;
+  background:    #388E3C;
+}
+
+.field .viewdiag .scrollbar div {
+  position:      absolute;
+  width:         15px;
+  height:        15px;
+  border:        1px solid #FFF;
+  border-radius: 10px;
+  transition:    transform .5s;
+  transform:     translate(-7.5px,-6px);
+  cursor:        pointer;
+  background:    #388E3C;
+}
+
+.field .viewdiag .scrollbar div:hover {
+  transform: translate(-7.5px,-6px) scale(1.2);
+}
+
+.field .posdiag {
+  position:        absolute;
+  width:           500px;
+  padding:         30px 40px;
+  border:          2px solid #388E3C;
+  border-radius:   5px;
+  box-shadow:      0px 0px 20px 10px rgba(0,0,0,0.5);
+  transition:      .2s;
+  z-index:         3;
+  color:           #FFF;
+  background:      #333;
+}
+
+.field .posdiag .text {
+  width:      100%;
+  text-align: center;
+}
+
+.field .posdiag .cards {
+  display:         flex;
+  margin-top:      20px;
+  justify-content: center;
+}
+
+.field .posdiag .cards .atk, .field .posdiag .cards .def {
+  display: block;
+  height:  100px;
+}
+
+.field .posdiag .def {
+  margin-left: 50px;
+  transform:   rotate(-90deg);
+}
+
+.field .posdiag.hide {
+  transform: scale(0);
+}
+
+.field .tribute {
+  position:   absolute;
+  width:      100px;
+  height:     100px;
+  top:        calc(50% + 15px);
+  transition: ease-out .3s;
+  z-index:    2;
+}
+
+.field .tribute img {
+  display:   block;
+  width:     100px;
+  height:    100px;
+  animation: spin linear 10s infinite;
+}
+
+.field .tribute.m1 {
+  left: calc(50% - 270px);
+}
+
+.field .tribute.m2 {
+  left: calc(50% - 160px);
+}
+
+.field .tribute.m3 {
+  left: calc(50% - 50px);
+}
+
+.field .tribute.m4 {
+  left: calc(50% + 60px);
+}
+
+.field .tribute.m5 {
+  left: calc(50% + 170px);
+}
+
+.field .tribute.hide {
+  transform: scale(0);
+}
+
+.field .dimForTribute {
+  filter: brightness(50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fadeout {
+  transition:     0.5s !important;
+  transform:      scale(4) !important;
+  pointer-events: none !important;
+  opacity:        0 !important;
+  z-index:        5;
+}
+
+.stFaceDown.fadeout {
+  transform: scale(4) rotateY(180deg) !important;
+}
+
+
+
+
+
+
+
+
+

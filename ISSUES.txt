@@ -1,0 +1,32 @@
+------------------------------------- ERRORS -------------------------------------
+Ownership of the card should be added to the card's object in the game object
+Giant Trunade should only shuffle hands to which cards where returned
+Rewrite code using synchronous callbacks
+[Fixed] Attack position card must be shielded differently from defense position card
+[Fixed] Glitch when trying to summon a 1-tribute monster after a 2-tribute monster
+[Fixed] Card tooltip does not show when hovering over a card that requires tributes when the monster zone is full
+[Fixed] game.afterDamage() must always reset itself
+[Fixed] In "Monster Reborn", if monster is already on top, do not bring it to top
+[Fixed] Bring card to the top and make it glow in "Sangan" and "Witch of the Black Forest"
+[Fixed] Monster special summoned by "Monster Reborn" is not removed from the graveyard
+[Fixed] Continue implementation of reopenLastDiag
+[Fixed] "Monster Reborn" should allow summoning in face-up defense position.
+[Fixed] When damage is zero, game.status does not revert to "idle"
+[Fixed] After designating cards for an effect, the status stays at fieldSelect for a while, allowing more than the required number of cards to be selected.
+
+------------------------------------- NOTES --------------------------------------
+"Monster Reborn" splices out the first card with the given ID in the graveyard
+
+-------------------------------- CODE REFACTORING --------------------------------
+Refactor function bringToTop
+Refactor function applpyDamage (first check for position then for damage value)
+[Done] Remove function removeArrElement and replace all instances with splice
+Replace all loops on nodelists with foreach loops.
+[Done] Use Array.prototype.some and Array.prototype.every instead of map and filter in checkActivationConditions
+[Done] Use bitwise-anding with 1 for parity check
+[Done] Use the spread operator instead of Array.concat()
+Replace querySelector() and querySelectorAll() with shorthand functions ($ and $$)
+
+----------------------------------- AESTHETICS -----------------------------------
+After activating "Monster Reborn" card should first be brought to the top before position is asked for
+Disable arrows/scrollbar in view diag when there are less than 6 cards

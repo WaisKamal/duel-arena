@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>Duel Arena</title>
+    <link rel="icon" href="img/logo.png"/>
+    <link rel="stylesheet" type="text/css" href="css/layout.css"/>
+    <link rel="stylesheet" type="text/css" href="css/MaterialIcons.css"/>
+  </head>
+  <body>
+    <div class="overlay hide" data-click-hide="true"></div>
+    <div class="pane">
+      <div class="lp">
+        <div class="wrapper p2">
+          <div class="avatar">
+            <img src="img/avatar.png"/>
+          </div>
+          <div class="info">
+            <div class="lptext">
+              <span class="lpcount">8000</span>
+              <span class="lpdiff hide">0</span>
+            </div>
+            <div class="lpbar">
+              <div class="fluid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="img/cards/back.png"/>
+      </div>
+
+      <div class="cardinfo back">
+        <div class="namewrapper">
+          <div class="name">Morphing Jar #2</div>
+          <div class="attrib">
+            <img src="img/attrib/earth.png">
+          </div>
+        </div>
+        <div class="type">[Rock/Effect]</div>
+        <div class="level">
+          <img src="img/level.png"/>
+          <img src="img/level.png"/>
+          <img src="img/level.png"/>
+        </div>
+        <div class="text effect">FLIP: Shuffle all monsters on the field into the Deck. Then, each player excavates cards from the top of their Deck, until they excavate the same number of monsters they shuffled into their Main Deck. Special Summon all excavated Level 4 or lower monsters in face-down Defense Position, also send the remaining cards to the Graveyard.</div>
+        <div class="battledata">
+          ATK:
+          <span class="atk">800</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          DEF:
+          <span class="def">700</span>
+        </div>
+      </div>
+
+      <div class="lp">
+        <div class="wrapper p1">
+          <div class="avatar">
+            <img src="img/avatar.png"/>
+          </div>
+          <div class="info">
+            <div class="lptext">
+              <span class="lpcount">8000</span>
+              <span class="lpdiff hide">0</span>
+            </div>
+            <div class="lpbar">
+              <div class="fluid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phases">
+      <div data-value="dp" data-text="Draw Phase" onclick="drawCard(1)">DP</div>
+      <div data-value="sp" data-text="Standby Phase" onclick="drawCard(2)">SP</div>
+      <div data-value="m1" data-text="Main Phase 1" onclick="toggleViewDiag()">M1</div>
+      <div data-value="bp" data-text="Battle Phase">BP</div>
+      <div data-value="m2" data-text="Main Phase 2">M2</div>
+      <div data-value="ep" data-text="End Phase">EP</div>
+    </div>
+
+    <div class="field">
+      <img class="fieldimg" src="img/field.png"/>
+
+      <div class="phaseview hide">Draw Phase</div>
+
+      <div class="sword p1 s1 hide">
+        <img src="img/sword.png"/>
+      </div>
+      <div class="sword p1 s2 hide">
+        <img src="img/sword.png"/>
+      </div>
+      <div class="sword p1 s3 hide">
+        <img src="img/sword.png"/>
+      </div>
+      <div class="sword p1 s4 hide">
+        <img src="img/sword.png"/>
+      </div>
+      <div class="sword p1 s5 hide">
+        <img src="img/sword.png"/>
+      </div>
+
+      <div class="cardtooltip hide"></div>
+      <div class="fieldtooltip hide"></div>
+
+      <div class="okdiag hide">
+        <div class="text">Select one monster to destroy.</div>
+        <div class="buttons">
+          <div class="yes">
+            OK
+          </div>
+        </div>
+      </div>
+
+      <div class="yesnodiag hide">
+        <div class="text">Your opponent is about to end their turn. Activate the effect of a spell card?</div>
+        <div class="buttons">
+          <div class="yes">
+            Yes
+          </div>
+          <div class="no">
+            No
+          </div>
+        </div>
+      </div>
+
+      <div class="discarddiag hide">
+        <div class="text">
+          Discard <span class="nofcards">5 cards</span> from your hand:
+        </div>
+        <div class="cards">
+          <img src="img/cards/back.png"/>
+          <img src="img/cards/back.png"/>
+          <img src="img/cards/back.png"/>
+          <img src="img/cards/back.png"/>
+          <img src="img/cards/back.png"/>
+        </div>
+      </div>
+
+      <div class="viewdiag hide">
+        <div class="arrow left">
+          <i class="material-icons">chevron_left</i>
+        </div>
+        <div class="arrow right">
+          <i class="material-icons">chevron_right</i>
+        </div>
+        <div class="cardrow">
+          <div class="card">
+            <img src="img/cards/1.png"/>
+          </div>
+          <div class="card">
+            <img src="img/cards/2.png"/>
+          </div>
+          <div class="card">
+            <img src="img/cards/3.png"/>
+          </div>
+          <div class="card">
+            <img src="img/cards/4.png"/>
+          </div>
+          <div class="card">
+            <img src="img/cards/5.png"/>
+          </div>
+        </div>
+        <div class="scrollbar">
+          <div class="handle"></div>
+        </div>
+      </div>
+
+      <div class="posdiag hide">
+        <div class="text">Select card position:</div>
+        <div class="cards">
+          <img class="atk" src="img/cards/2.png"/>
+          <img class="def" src="img/cards/2.png"/>
+        </div>
+      </div>
+
+      <div class="p1deck">
+        <img src="img/cards/back.png"/>
+      </div>
+
+      <div class="p2deck">
+        <img src="img/cards/back.png"/>
+      </div>
+
+      <div class="p1fusion">
+        <img src="img/cards/back.png"/>
+      </div>
+
+      <div class="p2fusion">
+        <img src="img/cards/back.png"/>
+      </div>
+
+      <div class="tribute m1 hide">
+        <img src="img/tribute.png"/>
+      </div>
+      <div class="tribute m2 hide">
+        <img src="img/tribute.png"/>
+      </div>
+      <div class="tribute m3 hide">
+        <img src="img/tribute.png"/>
+      </div>
+      <div class="tribute m4 hide">
+        <img src="img/tribute.png"/>
+      </div>
+      <div class="tribute m5 hide">
+        <img src="img/tribute.png"/>
+      </div>
+    </div>
+
+    <script src="js/cards.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
